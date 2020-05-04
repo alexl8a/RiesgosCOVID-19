@@ -1,0 +1,129 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block title %}
+    Detalle de encuesta
+{% endblock title %}
+
+
+{% block breadcrumb %}
+    <li>Detalle de encuesta</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-24 col-xl-12 m-b-20">
+        
+        <h4 class="card-title">{{ response.survey.name }}</h4>
+        
+        <h5 class="card-title"><strong>Encuestado:</strong> {{ response.user.get_full_name }}</h5>
+        
+        <!-- top tiles -->
+        <div class="row tile-count">
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tile-stats-count">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-4">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <h5 class="text-muted text-uppercase">Presentación</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-6">
+                        <h3 class="">
+                            <strong>
+                                {{ response.completion_date | date:"SHORT_DATE_FORMAT" }}
+                            </strong>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tile-stats-count">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-3">
+                        <i class="fa fa-files-o" aria-hidden="true"></i>
+                        <h5 class="text-muted text-uppercase">Validez</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-6">
+                        <h3><strong>{{ response.expired_on | date:"SHORT_DATE_FORMAT" }}</strong></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tile-stats-count">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-6">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <h5 class="text-muted text-uppercase">Riesgo infección</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-6">
+                        <h5 class="counter text-right m-t-15 text-danger">
+                            {{ response.risk_result_i }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tile-stats-count">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-6"><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                        <h5 class="text-muted text-uppercase">
+                            Riesgo vulnerabilidad
+                        </h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-6">
+                        <h3 class="counter text-right m-t-15 text-success">
+                            {{ response.risk_result_v }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /top tiles -->
+
+        <div class="row">
+            <div class="col-24 col-xl-12 m-b-20">
+                <div class="bg-white padding-25 h-100">
+                    <h4 class="mt-0 box-title">  de la encuesta</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Pregunta</th>
+                                    <th scope="col">Respuesta</th>
+                                    <th scope="col">Infección</th>
+                                    <th scope="col">Vulnerabilidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for answer in answers %}
+                                    <tr>
+                                        <th scope="row">{{ answer.option.question.id }}</th>
+                                        <td>{{ answer.option.question.text }}</td>
+                                        <td>{{ answer.answer_value }}</td>
+                                        <td>
+                                            <span class="badge badge-pill badge-danger text-uppercase">
+                                                {{ answer.risk_result_i }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-pill badge-success text-uppercase">
+                                                {{ answer.risk_result_v }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <a href="{% url 'web:response_list' %}" class="btn btn-block btn-theme ripple">
+                Regresar
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

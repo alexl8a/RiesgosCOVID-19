@@ -1,0 +1,87 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Riesgos KIO Networks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <link href="{% static 'lookandfeel/css/vendor.min.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'lookandfeel/css/main.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'lookandfeel/css/color-settings.css' %}" rel="stylesheet" type="text/css" media="all"
+        data-role="color-settings" />
+    <link href="{% static 'lookandfeel/css/login-register.css' %}" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body class="nav-md theme-green">
+
+    <!-- page content  -->
+    <div class="main-container login-register">
+        <div class="d-flex justify-content-center h-100vh w-100 align-items-center">
+            <div class="login-container">
+                <div class="form-container">
+                    <div class="text-center logo-container">
+                        <a href="{% url 'landingpage:landingpage' %}">
+                            <span class="text-theme logo">
+                                KIO Pass
+                            </span>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <p class="mb-2">Inicia Sesión Con</p>
+                    </div>
+                    <a class="btn btn-lg btn-block btn-googleplus mb-2" href="{% url 'social:begin' 'google-oauth2' %}">
+                        <i class="fa fa-google-plus left" aria-hidden="true"></i>
+                        <span>Google+</span>
+                    </a>
+                    <div class="text-center">
+                        <p class="mb-2">O</p>
+                    </div>
+                    <div class="mb-4">
+                        <button class="btn btn-primary btn-block" type="button" data-toggle="collapse"
+                            data-target="#collapseLogin" aria-expanded="false" aria-controls="collapseLogin">
+                            ¿No tienes una cuenta de Google?
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseLogin">
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+                            {{ form | crispy }}
+
+                            <button type="submit" class="btn btn-success btn-block mt-2">
+                                Entrar
+                            </button>
+
+                        </form>
+                    </div>
+                    <p class="text-small mt-5 text-center">
+                        <a href="{% url 'landingpage:terms' %}">Términos y condiciones de uso</a>
+                    </p>
+                    <p class="text-small text-center">
+                        <a href="{% url 'landingpage:privacy' %}">Política de privacidad</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- site foot -->
+    <script src="{% static 'lookandfeel/js/vendor.min.js' %}"></script>
+    <script src="{% static 'lookandfeel/js/main.js' %}"></script>
+    <script src="{% static 'lookandfeel/js/settings.min.js' %}"></script>
+    <script src="{% static 'lookandfeel/js/charts.js' %}"></script>
+</body>
+
+</html>
+<!-- /site foot -->

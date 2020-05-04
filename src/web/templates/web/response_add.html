@@ -1,0 +1,636 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ survey.name }}
+{% endblock title %}
+
+
+{% block breadcrumb %}
+    <li>{{ survey.name }}</li>
+{% endblock breadcrumb %}
+
+{% block menu %}
+
+<li class="nav-item">
+    <a href="{% url 'web:response_add' %}" title="Dashboard">
+        <i class="fa fa-plus-square" aria-hidden="true"></i>
+        <span>Nueva encuesta</span>
+    </a>
+</li>
+
+{% endblock menu %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="bg-white padding-25 h-100">
+            <h4 class="mt-0 box-title">KIO Pass</h4>
+            <div class="card card-shadowless">
+                <div class="wizard">
+                    
+                    <div class="progress w-75">
+                        <div class="progress-bar w-0" id="wizard-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    
+                    <ul class="nav nav-justified wizard-navigation text-uppercase">
+                        
+                        <li class="nav-item active" id="wizardNavigationStep1" data-tab="Step1">
+                            <a class="nav-link">
+                                <span class="wizard-navigation-number">1</span>
+                            </a>
+                            <span class="wizard-navigation-name">Bienvenida</span>
+                        </li>
+                        
+                        <li class="nav-item" id="wizardNavigationStep2" data-tab="Step2">
+                            <a class="nav-link">
+                                <span class="wizard-navigation-number">2</span>
+                            </a>
+                            <span class="wizard-navigation-name">Cuestionario</span>
+                        </li>
+                        
+                        <li class="nav-item" id="wizardNavigationStep3" data-tab="Step3">
+                            <a class="nav-link">
+                                <span class="wizard-navigation-number">3</span>
+                            </a>
+                            <span class="wizard-navigation-name">Confirmación</span>
+                        </li>
+                        
+                        <li class="nav-item" id="wizardNavigationStep4" data-tab="Step4">
+                            <a class="nav-link">
+                                <span class="wizard-navigation-number">4</span>
+                            </a>
+                            <span class="wizard-navigation-name">Gracias</span>
+                        </li>
+
+                    </ul>                                    
+                        
+                    <div class="wizard-content">                                            
+
+                            <div class="" id="Step1" data-opened-step="true">
+                                
+                                <p class="mt-5">                                    
+                                    En KIO Networks nos preocupamos por la salud de todos.
+                                </p>                                    
+                                
+                                <p>
+                                    KIO Pass es una herramienta que nos ayuda a valorar información general relevante para la contingencia sanitaria, de toda persona que requiera acceder a cualquiera de nuestras instalaciones, para realizar una actividad que no pueda postergarse.
+                                </p>
+
+                                <p>
+                                    El objetivo es mantener nuestras instalaciones y a los colaboradores libres del contagio del virus SARS-Cov-2, mejor conocido como COVID-19.
+                                </p>
+
+                                <p>
+                                    Te agradeceremos contestar de manera honesta la siguiente encuesta la cual busca puntualmente, minimizar tanto como sea posible, el que algún portador del virus ingrese a cualquier instalación de KIO Networks y ponga en riesgo a otros colaboradores o personas que puedan estar operando al interior de nuestros facilities.
+                                </p>
+
+                                <p>
+                                    No es un diagnóstico y tampoco garantiza que no haya algún contagio. La información proporcionada en esta encuesta es totalmente confidencial y será utilizada para conceder el acceso a las instalaciones en la fecha y horario indicado. Puedes leer nuestro aviso de privacidad en https://kiolink.kioapps.com/aviso-privacidad
+                                </p>
+
+                                <p>
+                                    KIO Networks no se hace responsable de las respuestas emitidas por los usuarios de este cuestionario.
+                                </p>
+
+                                <form id="frmTerms">
+                                    <div class="">
+                                        <div class="form-check">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="txtTerms" required>
+                                                <label class="custom-control-label" for="txtTerms">
+                                                    Acepto los <a target="_blank" href="{% url 'landingpage:terms' %}">términos y condiciones de uso</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-theme btn-raised float-sm-right">
+                                        Siguiente
+                                    </button>
+                                </form>
+
+                            </div>
+                            
+                            <div id="Step2" data-opened-step="false">
+
+                                <form id="frmSurvey1">
+
+                                    <h4 class="mt-5">¿A qué oficina necesitas entrar?</h4>                                    
+
+                                    <div class="form-check">
+                                        <div class="custom-control custom-radio material-radio custom-control-inline">                                                            
+                                            <input
+                                                type="radio" 
+                                                class="custom-control-input"
+                                                name="facility"
+                                                value="1"
+                                                id="facility1"
+                                                required>                                                
+                                            <label class="custom-control-label" for="facility1">
+                                                México
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio material-radio custom-control-inline">                                                            
+                                            <input
+                                                type="radio" 
+                                                class="custom-control-input"
+                                                name="facility"
+                                                value="2"
+                                                id="facility2"
+                                                required>                                                
+                                            <label class="custom-control-label" for="facility2">
+                                                Guatemala
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio material-radio custom-control-inline">                                                            
+                                            <input
+                                                type="radio" 
+                                                class="custom-control-input"
+                                                name="facility"
+                                                value="3"
+                                                id="facility3"
+                                                required>                                                
+                                            <label class="custom-control-label" for="facility3">
+                                                Panamá
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio material-radio custom-control-inline">                                                                                                           
+                                            <input
+                                                type="radio" 
+                                                class="custom-control-input"
+                                                name="facility"
+                                                value="4"
+                                                id="facility4"
+                                                required>                                                
+                                            <label class="custom-control-label" for="facility4">
+                                                República Dominicana
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    {% for question in questions1 %}
+
+                                        <h4 class="mt-5">{{ question.text }}</h4>
+                                            
+                                        {% if question.question_type == 1 %}
+                                            
+                                            <div class="form-check">
+                                                {% for option in question.options.all %}
+
+                                                    {% if option.enabled %}
+
+                                                        <div class="custom-control custom-radio material-radio {% if question.options.count <= 2 %}custom-control-inline{% endif %}">
+                                                            
+                                                            <input 
+                                                                type="radio" 
+                                                                class="custom-control-input"
+                                                                name="1-{{ question.id }}"
+                                                                value="{{ option.id }}"
+                                                                id="{{ option.id }}"                                                            
+                                                                {% if question.required %}required{% endif %}>
+                                                                
+                                                            <label class="custom-control-label" for="{{ option.id }}">
+                                                                {{ option.text }}
+                                                            </label>
+
+                                                        </div>
+                                                    
+                                                    {% endif %}
+
+                                                {% endfor %}
+                                            </div>
+
+                                        {% elif question.question_type == 2 %}
+                                            
+                                            {% for option in question.options.all %}
+
+                                                {% if option.enabled %}
+                                                
+                                                    <div class="form-group floating-label">
+                                                        <div class="form-check">
+                                                            <div class="custom-control custom-checkbox material-checkbox">
+                                                                
+                                                                <input 
+                                                                    type="checkbox" 
+                                                                    class="custom-control-input" 
+                                                                    id="2-{{ option.id }}" 
+                                                                    name="2-{{ option.id }}">
+                                                                
+                                                                <label class="custom-control-label" for="2-{{ option.id }}">{{ option.text }}</label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                            
+                                            {% endfor %}
+
+                                        {% elif question.question_type == 3 %}
+                                            
+                                            <div class="form-group floating-label">
+                                                
+                                                <input 
+                                                    type="number"
+                                                    class="form-control"
+                                                    id="3-{{ question.id }}"
+                                                    name="3-{{ question.id }}"
+                                                    step="0.01"
+                                                    {% if question.required %}required{% endif %}>
+                                                
+                                                <label for="3-{{ question.id }}"></label>
+
+                                            </div>
+
+                                        {% elif question.question_type == 4 %}
+                                            
+                                            <div class="form-group floating-label">
+                                                
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="4-{{ question.id }}"
+                                                    name="4-{{ question.id }}"
+                                                    {% if question.required %}required{% endif %}>
+
+                                                <label for="username"></label>
+                                                
+                                            </div>
+                                            
+                                        {% else %}
+
+                                            <p>Tipo desconosido</p>
+
+                                        {% endif %}
+                                        
+                                    {% empty %}
+
+                                        <p>No se encontraron preguntas en el cuestionario.</p>
+                                        
+                                    {% endfor %}
+
+                                    <button type="submit" class="btn btn-theme btn-raised float-sm-right">
+                                        Siguiente
+                                    </button>
+                                
+                                </form>
+
+                            </div>
+                                
+                            <div id="Step3" data-opened-step="false">
+                                
+                                <form id="frmSurvey2">
+                                
+                                    {% for question in questions2 %}
+
+                                        <h4 class="mt-5">{{ question.text }}</h4>
+                                            
+                                        {% if question.question_type == 1 %}
+                                            
+                                            <div class="form-check">
+                                                {% for option in question.options.all %}
+
+                                                    {% if option.enabled %}
+
+                                                        <div class="custom-control custom-radio material-radio {% if question.options.count <= 2 %}custom-control-inline{% endif %}">
+                                                            
+                                                            <input 
+                                                                type="radio" 
+                                                                class="custom-control-input"
+                                                                name="1-{{ question.id }}"
+                                                                value="{{ option.id }}"
+                                                                id="{{ option.id }}"                                                            
+                                                                {% if question.required %}required{% endif %}>
+                                                                
+                                                            <label class="custom-control-label" for="{{ option.id }}">
+                                                                {{ option.text }}
+                                                            </label>
+
+                                                        </div>
+                                                    
+                                                    {% endif %}
+
+                                                {% endfor %}
+                                            </div>
+
+                                        {% elif question.question_type == 2 %}
+                                            
+                                            {% for option in question.options.all %}
+
+                                                {% if option.enabled %}
+                                                
+                                                    <div class="form-group floating-label">
+                                                        <div class="form-check">
+                                                            <div class="custom-control custom-checkbox material-checkbox">
+                                                                
+                                                                <input 
+                                                                    type="checkbox" 
+                                                                    class="custom-control-input" 
+                                                                    id="2-{{ option.id }}" 
+                                                                    name="2-{{ option.id }}">
+                                                                
+                                                                <label class="custom-control-label" for="2-{{ option.id }}">{{ option.text }}</label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                            
+                                            {% endfor %}
+
+                                        {% elif question.question_type == 3 %}
+                                            
+                                            <div class="form-group floating-label">
+                                                
+                                                <input 
+                                                    type="number"
+                                                    class="form-control"
+                                                    id="3-{{ question.id }}"
+                                                    name="3-{{ question.id }}"
+                                                    {% if question.required %}required{% endif %}>
+                                                
+                                                <label for="3-{{ question.id }}"></label>
+
+                                            </div>
+
+                                        {% elif question.question_type == 4 %}
+                                            
+                                            <div class="form-group floating-label">
+                                                
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="4-{{ question.id }}"
+                                                    name="4-{{ question.id }}"
+                                                    {% if question.required %}required{% endif %}>
+
+                                                <label for="username"></label>
+                                                
+                                            </div>
+                                            
+                                        {% else %}
+
+                                            <p>Tipo desconosido</p>
+
+                                        {% endif %}
+                                        
+                                    {% empty %}
+
+                                        <p>No se encontraron preguntas en el cuestionario.</p>
+                                        
+                                    {% endfor %}
+
+                                    <button type="submit" class="btn btn-theme btn-raised float-sm-right">
+                                        Siguiente
+                                    </button>
+                                
+                                </form>
+
+                            </div>
+                            
+                            <div id="Step4" data-opened-step="false">
+
+                                <form id="frmSurvey3">
+
+                                    {% csrf_token %}
+                                
+                                    {% for question in questions3 %}
+
+                                        <h4 class="mt-5">{{ question.text }}</h4>
+                                            
+                                        {% if question.question_type == 1 %}
+                                            
+                                            <div class="form-check">
+                                                {% for option in question.options.all %}
+
+                                                    {% if option.enabled %}
+
+                                                        <div class="custom-control custom-radio material-radio {% if question.options.count <= 2 %}custom-control-inline{% endif %}">
+                                                            
+                                                            <input 
+                                                                type="radio" 
+                                                                class="custom-control-input"
+                                                                name="1-{{ question.id }}"
+                                                                value="{{ option.id }}"
+                                                                id="{{ option.id }}"                                                            
+                                                                {% if question.required %}required{% endif %}>
+                                                                
+                                                            <label class="custom-control-label" for="{{ option.id }}">
+                                                                {{ option.text }}
+                                                            </label>
+
+                                                        </div>
+                                                    
+                                                    {% endif %}
+
+                                                {% endfor %}
+                                            </div>
+
+                                        {% elif question.question_type == 2 %}
+                                            
+                                            {% for option in question.options.all %}
+
+                                                {% if option.enabled %}
+                                                
+                                                    <div class="form-group floating-label">
+                                                        <div class="form-check">
+                                                            <div class="custom-control custom-checkbox material-checkbox">
+                                                                
+                                                                <input 
+                                                                    type="checkbox" 
+                                                                    class="custom-control-input" 
+                                                                    id="2-{{ option.id }}" 
+                                                                    name="2-{{ option.id }}">
+                                                                
+                                                                <label class="custom-control-label" for="2-{{ option.id }}">{{ option.text }}</label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                            
+                                            {% endfor %}
+
+                                        {% elif question.question_type == 3 %}
+                                            
+                                            <div class="form-group floating-label">
+                                                
+                                                <input 
+                                                    type="number"
+                                                    class="form-control"
+                                                    id="3-{{ question.id }}"
+                                                    name="3-{{ question.id }}"
+                                                    {% if question.required %}required{% endif %}>
+                                                
+                                                <label for="3-{{ question.id }}"></label>
+
+                                            </div>
+
+                                        {% elif question.question_type == 4 %}
+                                            
+                                            <div class="form-group floating-label">
+                                                
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="4-{{ question.id }}"
+                                                    name="4-{{ question.id }}"
+                                                    {% if question.required %}required{% endif %}>
+
+                                                <label for="username"></label>
+                                                
+                                            </div>
+                                            
+                                        {% else %}
+
+                                            <p>Tipo desconosido</p>
+
+                                        {% endif %}
+                                        
+                                    {% empty %}
+
+                                        <p>No se encontraron preguntas en el cuestionario.</p>
+                                        
+                                    {% endfor %}
+
+                                    <button type="submit" id="btnSurvey3Submit" style="display: none;"></button>
+                                
+                                </form>
+                            
+                            </div>
+
+                    </div>                    
+
+                    <div class="wizard-buttons mt-5">
+                        <button type="button" id="ButtonPrevious" data-prev-step="" class="btn btn-light btn-raised float-left">
+                            <i class="fa fa-angle-left left"></i>
+                            <span>Anterior</span>
+                        </button>
+                        <button type="button" id="ButtonNext" data-next-step="Step2" style="display: none;">
+                            <span>Siguiente</span>
+                            <i class="fa fa-angle-right right" aria-hidden="true"></i>
+                        </button>
+                        <button type="submit" id="ButtonFinish" class="btn btn-theme btn-raised float-sm-right">
+                            Finalizar
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+    $(function(){        
+
+        var formData1;
+        var formData2;
+        var formData3;
+        
+        var frmTerms = $("#frmTerms");        
+
+        var frmSurvey1 = $("#frmSurvey1");
+        var frmSurvey3 = $("#frmSurvey3");
+        var frmSurvey2 = $("#frmSurvey2");
+
+        var btnSurvey3Submit = $("#btnSurvey3Submit");
+
+        var step1 = $("#Step1");
+        var step2 = $("#Step2");
+        var step3 = $("#Step3");
+        var step4 = $("#Step4");
+
+        // Disable tabs        
+        musa.wizardTab1.onclick = function (e) { e.preventDefault() }
+        musa.wizardTab2.onclick = function (e) { e.preventDefault() }
+        musa.wizardTab3.onclick = function (e) { e.preventDefault() }
+        musa.wizardTab4.onclick = function (e) { e.preventDefault() }    
+
+        var getCurrentTap = function(){
+
+            if ( step1.attr("data-opened-step") == "true" ) {
+                return 1;
+            }
+            
+            if ( step2.attr("data-opened-step") == "true" ) {
+                return 2;
+            }
+            
+            if ( step3.attr("data-opened-step") == "true" ) {
+                return 3;
+            }
+            
+            if ( step4.attr("data-opened-step") == "true" ) {
+                return 4;
+            }
+
+        };
+
+        $(musa.wizardSubmit).click(function(e){
+            e.preventDefault();
+            btnSurvey3Submit.click();
+        });
+
+        frmTerms.submit(function(e) {
+            e.preventDefault();
+            window.scrollTo(0,0);
+            $(musa.wizardNextButton).click();
+        });
+
+        frmSurvey1.submit(function(e) {
+            e.preventDefault();
+
+            formData1 = new FormData($(this)[0]);
+
+            window.scrollTo(0,0);
+            
+            $(musa.wizardNextButton).click();
+        });
+
+        frmSurvey2.submit(function(e) {
+            e.preventDefault();            
+            
+            formData2 = new FormData($(this)[0]);
+
+            window.scrollTo(0,0);
+            
+            $(musa.wizardNextButton).click();
+        });
+        
+        frmSurvey3.submit(function(e) {
+            e.preventDefault();
+
+            formData3 = new FormData($(this)[0]);
+            
+            for (var pair of formData1.entries()) {
+                formData3.append(pair[0], pair[1]);
+            }
+
+            for (var pair of formData2.entries()) {
+                formData3.append(pair[0], pair[1]);
+            }            
+
+            $.ajax({
+                type: "POST",
+                data: formData3,
+                processData: false,
+                contentType: false,
+            }).done(function (data) {
+                window.location.href = "{% url 'web:response_list' %}";
+            }).fail(function (response) {
+                console.log(response.responseTEXT);
+                alert("Error interno intente mas tarde");
+            });
+        });        
+    
+    });
+</script>
+{% endblock script %}

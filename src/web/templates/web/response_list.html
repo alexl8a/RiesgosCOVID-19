@@ -1,0 +1,132 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block title %}
+Encuestas
+{% endblock title %}
+
+
+{% block breadcrumb %}
+<li>Encuestas</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 carousel-wrapper mb-2">
+        <div class="h-100 w-100 bg-info padding-25 d-flex align-items-center justify-content-center">
+            <p>
+                KIO Pass es una herramienta que nos ayuda a valorar información general relevante a la contingencia
+                sanitaria, de toda persona que requiera acceder a cualquiera de las instalaciones de KIO, para realizar
+                una actividad que no pueda postergarse.
+                <br /><br />
+                El objetivo es mantener nuestras instalaciones y a los colaboradores libres del virus SARS-Cov-2.
+
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+        <div class="card">
+            {% if response.is_authorized %}
+            <img src="{% static 'web/img/unexpired.png' %}" class="card-img-top">
+            {% else %}
+            <img src="{% static 'web/img/expired.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h4 class="card-title text-center">{{ response.user.get_full_name }}</h4>
+                <p class="card-text">
+                    {% if response.is_authorized %}
+                    <h4 class="text-success text-center">Autorizado</h4><br />
+                    {% else %}
+                    <h4 class="text-danger text-center">No se recomienda acceso</h4><br />
+                    {% endif %}
+                    <p class="text-center">Válido hasta: {{ response.expired_on }}
+                        <p />
+                    </p>
+                    <div class="">
+                        <a href="{% url 'web:response_detail' pk=response.pk %}" class="btn btn-block btn-theme ripple">
+                            Detalle
+                        </a>
+                        <a href="{% url 'web:response_pdf' pk=response.pk %}" class="btn btn-block btn-theme ripple">
+                            Descargar Pdf
+                        </a>
+                        <button type="button" class="btn btn-block btn-info ripple" data-toggle="modal"
+                            data-target="#exampleModalLong">
+                            Ayuda
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Ayuda</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Si tiene alguna duda sobre su resultado puede comunicarse por uno de los siguientes canales con gusto le ayudaremos</p>
+                                        {% if response.facility == 1 %}
+                                        <p>
+                                            Pendiente
+                                        </p>
+                                        {% elif response.facility == 2 %}
+                                        <p>
+                                            <strong>Guatemala:</strong><br />
+                                            supportgt@kionetworks.com<br />
+                                            NOC: (502) 2318-9102<br />
+                                        </p>
+                                        {% elif response.facility == 3 %}
+                                        <p>
+                                            <strong>Panamá:</strong><br />
+                                            supportpa@kionetworks.com<br />
+                                            (507) 380-9602<br />
+                                        </p>
+                                        {% elif response.facility == 4 %}
+                                        <p>
+                                            <strong>Dominicana:</strong><br />
+                                            supportdo@kionetworks.com<br />
+                                            (809) 475-7500<br />
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'web/sweetalert2/sweetalert2@9.js' %}"></script>
+<script>
+    $(function () {
+        {% if messages %}
+            {% for message in messages %}
+                Swal.fire(
+                    "Gracias",
+                    "{{ message }}",
+                    "success"
+                );
+            {% endfor %}
+        {% endif %}
+    });
+</script>
+{% endblock script %}

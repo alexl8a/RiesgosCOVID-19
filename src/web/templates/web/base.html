@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>{% block title %}KIO Pass{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="description" content="{% block description %}{% endblock description %}" />
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'lookandfeel/img/favicon.png' %}" />
+    <link href="{% static 'lookandfeel/css/vendor.min.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'lookandfeel/css/main.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'lookandfeel/css/color-settings.css' %}" rel="stylesheet" type="text/css" media="all"
+        data-role="color-settings" />
+    <link href="{% static 'lookandfeel/css/dashboard.css' %}" rel="stylesheet" type="text/css" media="all" />
+    {% block styles %}{% endblock styles %}
+</head>
+
+<body class="nav-md theme-green">
+    <div class="main-container">
+
+        <!-- sidebar -->
+        <div class="sidebar">
+            <div class="scroll-wrapper">
+                <div class="navbar nav-title">
+                    <a href="{% url 'landingpage:landingpage' %}" class="site-title navbar-brand site-logo">
+                        <span class="">KIO Pass</span>
+                    </a>
+                </div>
+                <div class="nav toggle">
+                    <a href="javascript:void(0)" id="sidebar-menu-toggle" class="btn btn-circle ripple">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile-info">
+                        <h2>{{ user.get_full_name }}</h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main-menu-wrapper">
+                    <div class="menu-section">
+                        <ul class="nav side-menu flex-column">
+                            {% if perms.data.view_response %}
+                            <li class="nav-item">
+                                <a href="{% url 'web:dashboard' %}" title="Dashboard">
+                                    <i class="fa fa-dashboard" aria-hidden="true"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a href="{% url 'web:response_list' %}" title="Dashboard">
+                                    <i class="fa fa-address-card" aria-hidden="true"></i>
+                                    <span>Encuestas</span>
+                                </a>
+                            </li>
+                            {% block menu %}{% endblock menu %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+            </div>
+            <div class="sidebar-triangle-wrapper">
+                <div class="sidebar-graphic-section">
+                    <div class="triangle-1"></div>
+                    <div class="triangle-2"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /sidebar -->
+
+        <div class="content-wrapper">
+
+            <!-- header content  -->
+            <header class="header">
+                <nav class="header-menu">
+                    <div class="nav toggle">
+                        <a href="javascript:void(0)" id="menu-toggle" class="ripple">
+                            <span class="bars"></span>
+                        </a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="profile-dropdown dropdown">
+                            <a href="javascript:void(0)" class="user-profile dropdown-toggle ripple"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <span class="d-none d-sm-block">{{ user.email }}</span>
+                                <span class="fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu float-right">
+                                <li class="d-none d-block-xs p-0">
+                                    <button type="button" class="close btn btn-circle"><i
+                                            class="fa fa-close"></i></button>
+                                    <div class="profile clearfix">
+                                        <div class="profile-info">
+                                            <h2>{{ user.get_full_name }}</h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                        Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <!-- /header content -->
+
+            <!-- page content -->
+            <div class="main-content small-gutter" role="main">
+                <div class="row bg-title clearfix page-title">
+                    <div class="col-12 col-lg-3">
+                        <h4 class="page-title">¡Bienvenido!</h4>
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <ol class="breadcrumb pl-0 pr-0 float-lg-right">
+                            <li><a href="{% url 'landingpage:landingpage' %}">KIO Pass</a></li>
+                            {% block breadcrumb %}{% endblock breadcrumb %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    {% block content %}{% endblock content %}
+                </div>
+            </div>
+
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer class="footer">
+                <div class="float-right">
+                    Diseño de aplicacion por
+                    <a href="javascript:void(0)" class="company-name text-theme">
+                        KIO Coding Garage
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+
+        </div>
+    </div>
+
+    <!-- site foot -->
+    <script src="{% static 'lookandfeel/js/vendor.min.js' %}"></script>
+    <script src="{% static 'lookandfeel/js/main.js' %}"></script>
+    <script src="{% static 'lookandfeel/js/settings.min.js' %}"></script>
+    <script src="{% static 'lookandfeel/js/charts.js' %}"></script>
+    {% block script %}{% endblock script %}
+</body>
+
+</html>
+<!-- /site foot -->

@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Reporte de resultado</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="description"
+      content="{% block description %}{% endblock description %}"
+    />
+    <meta
+      name="keywords"
+      content="{% block keywords %}{% endblock keywords %}"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'lookandfeel/img/favicon.png' %}"
+    />
+    <link
+      href="{% static 'lookandfeel/css/main.css' %}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+    <link
+      href="{% static 'lookandfeel/css/color-settings.css' %}"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      data-role="color-settings"
+    />
+  </head>
+
+  <body class="nav-md theme-green">
+    <div class="main-container">
+      <div class="content-wrapper">
+        <!-- page content -->
+        <div class="main-content small-gutter" role="main">
+          <div class="row bg-title clearfix page-title">
+            <div class="col-12 col-lg-3">
+              <h4 class="page-title" style="background-color:#99ffcc;">
+                Encuesta de Riesgo y Vulnerabilidad SARS-Cov-2 (Covid-19)
+              </h4>
+            </div>
+            <div class="col-12 col-lg-9">
+              <ol class="breadcrumb pl-0 pr-0 float-lg-right">
+                <li>
+                  <a href="{% url 'landingpage:landingpage' %}">KIO Pass</a>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="container-fluid" style="background-color:#99ffcc;">
+            KIO Pass es una herramienta que nos ayuda a valorar información general relevante a la contingencia sanitaria, de toda persona que requiera acceder a cualquiera de las instalaciones de KIO, para realizar una actividad que no pueda postergarse.
+            El objetivo es mantener nuestras instalaciones y a los colaboradores libres del virus SARS-Cov-2.
+        </div>
+        <br/>
+
+          <div class="container-fluid">
+            <h4 class="page-title" style="background-color:#99ffcc;">
+                Resumen de encuesta
+            </h4>
+
+            <div class="row">
+              <div class="col-24 col-xl-12 m-b-20">
+                <h4 class="card-title">{{ response.survey.name }}</h4>
+
+                <h4 class="card-title">
+                  <strong>Encuestado:</strong> {{ response.user.get_full_name }}
+                </h4>
+
+                <table class="table table-striped mb-0">
+                  <thead>
+                    <tr style="background-color:#99ffcc;">
+                      <th scope="col">Presentación</th>
+                      <th scope="col">Validez</th>
+                      <th scope="col">Riesgo de Infección</th>
+                      <th scope="col">Riesgo de vulnerabilidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{ response.completion_date | date:"SHORT_DATE_FORMAT" }}
+                      </td>
+                      <td>
+                        {{ response.expired_on | date:"SHORT_DATE_FORMAT" }}
+                      </td>
+                      <td style="text-align: center; text-decoration-color: red;"><h3>{{ response.risk_result_i }}</h3></td>
+                      <td style="text-align: center;; text-decoration-color: cyan;"><h3>{{ response.risk_result_v }}</h3></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="row">
+                  <div class="col-24 col-xl-12 m-b-20">
+                    <div class="bg-white padding-25 h-100">
+                      <h4 class="mt-0 box-title" style="background-color:#99ffcc;">Respuestas de la encuesta</h4>
+                      <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                          <thead>
+                            <tr style="background-color:#99ffcc;" >
+                              <th scope="col">#</th>
+                              <th scope="col">Pregunta</th>
+                              <th scope="col">Respuesta</th>
+                              <th scope="col">Infección</th>
+                              <th scope="col">Vulnerabilidad</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for answer in answers %}
+                            <tr >
+                              <td scope="row">
+                                {{ answer.option.question.id }}
+                              </td>
+                              <td>{{ answer.option.question.text }}</td>
+                              <td>{{ answer.answer_value }}</td>
+                              <td style="text-align: center;">
+                                <h3>{{ answer.risk_result_i }}</h3>
+                              </td>
+                              <td style="text-align: center;">
+                                <h3>{{ answer.risk_result_v }}</h3>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <!-- footer content -->
+        <footer class="footer">
+                <div class="float-right">
+                    Diseño de aplicacion por 
+                    <a href="javascript:void(0)" class="company-name text-theme">
+                        KIO Coding Garage
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+        </footer>            
+        <!-- /footer content -->
+
+      </div>
+    </div>
+  </body>
+</html>
+<!-- /site foot -->
