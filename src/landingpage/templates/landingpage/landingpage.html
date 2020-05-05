@@ -1,87 +1,311 @@
 {% load static %}
-{% load crispy_forms_tags %}
 <!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
+<!--<![endif]-->
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <title>Riesgos KIO Networks</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-    <meta name="keywords" content="">
-    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
-    <link href="{% static 'lookandfeel/css/vendor.min.css' %}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{% static 'lookandfeel/css/main.css' %}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{% static 'lookandfeel/css/color-settings.css' %}" rel="stylesheet" type="text/css" media="all"
-        data-role="color-settings" />
-    <link href="{% static 'lookandfeel/css/login-register.css' %}" rel="stylesheet" type="text/css" media="all" />
+  <!-- =====  BASIC PAGE NEEDS  ===== -->
+  <meta charset="utf-8">
+  <title>Análisis de Riesgos COVID-19</title>
+  <!-- =====  SEO MATE  ===== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="distribution" content="global">
+  <meta name="revisit-after" content="2 Days">
+  <meta name="robots" content="ALL">
+  <meta name="rating" content="8 YEARS">
+  <meta name="Language" content="en-us">
+  <meta name="GOOGLEBOT" content="NOARCHIVE">
+  <!-- =====  MOBILE SPECIFICATION  ===== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width">
+  <!-- =====  CSS  ===== -->
+  <link rel="stylesheet" type="text/css" href="{% static 'lookandfeel/landing/css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'lookandfeel/landing/css/menu.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'lookandfeel/landing/css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'lookandfeel/landing/images/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'lookandfeel/landing/images/apple-touch-icon.png' %}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{% static 'lookandfeel/landing/images/apple-touch-icon-72x72.png' %}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{% static 'lookandfeel/landing/images/apple-touch-icon-114x114.png' %}">
 </head>
 
-<body class="nav-md theme-green">
-
-    <!-- page content  -->
-    <div class="main-container login-register">
-        <div class="d-flex justify-content-center h-100vh w-100 align-items-center">
-            <div class="login-container">
-                <div class="form-container">
-                    <div class="text-center logo-container">
-                        <a href="{% url 'landingpage:landingpage' %}">
-                            <span class="text-theme logo">
-                                KIO Pass
-                            </span>
-                        </a>
-                    </div>
-                    <div class="text-center">
-                        <p class="mb-2">Inicia Sesión Con</p>
-                    </div>
-                    <a class="btn btn-lg btn-block btn-googleplus mb-2" href="{% url 'social:begin' 'google-oauth2' %}">
-                        <i class="fa fa-google-plus left" aria-hidden="true"></i>
-                        <span>Google+</span>
-                    </a>
-                    <div class="text-center">
-                        <p class="mb-2">O</p>
-                    </div>
-                    <div class="mb-4">
-                        <button class="btn btn-primary btn-block" type="button" data-toggle="collapse"
-                            data-target="#collapseLogin" aria-expanded="false" aria-controls="collapseLogin">
-                            ¿No tienes una cuenta de Google?
-                        </button>
-                    </div>
-                    <div class="collapse" id="collapseLogin">
-                        <form method="POST">
-
-                            {% csrf_token %}
-
-                            {{ form | crispy }}
-
-                            <button type="submit" class="btn btn-success btn-block mt-2">
-                                Entrar
-                            </button>
-
-                        </form>
-                    </div>
-                    <p class="text-small mt-5 text-center">
-                        <a href="{% url 'landingpage:terms' %}">Términos y condiciones de uso</a>
-                    </p>
-                    <p class="text-small text-center">
-                        <a href="{% url 'landingpage:privacy' %}">Política de privacidad</a>
-                    </p>
-                </div>
-            </div>
+<body id="home2" class="home2">
+  <!-- =====  LODER  ===== -->
+  <div class="loder"></div>
+  <div class="wrapper">
+    <!-- =====  HEADER START  ===== -->
+    <header id="header">
+      <div class="header navbar">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header pull-left"> <a class="navbar-brand" href="index.html"> <img alt="Alchemy Labs"  style="height:100%" src="{% static 'lookandfeel/landing/images/logo2.png' %}"> </a> </div>
+          <!-- Collection of nav links, forms, and other content for toggling -->
+          <div id="navbarCollapse" class="navbar-collapse navbar-right">
+            <nav id="menu" class='collapse'>
+              <!-- Navigation Menu -->
+              <ul class="nav">
+                <li class="active"> <a href="#home2">Home</a></li>
+                <li> <a href="#about">¿Qué es?</a></li>
+                <li> <a href="#answer">Contestar</a></li>
+                <li> <a href="#service">Ideas de usos</a></li>
+                <li> <a href="#team">¿Quiénes somos?</a></li>
+                <li> <a href="#contact">Contacto</a></li>
+              </ul>
+              <!--End Navigation Menu -->
+            </nav>
+          </div>
         </div>
+      </div>
+    </header>
+    <!-- =====  HEADER END  ===== -->
+    <!-- =====  BANNER STRAT  ===== -->
+    <div class="banner">
+      <div id="home"></div>
+      <div class="banner-detail">
+        <div class="cd-intro">
+          <h1 class="cd-headline letters type">
+            <span class="cd-words-wrapper waiting">
+              <b class="is-visible">¿Cómo saber si tengo Covid-19?</b>
+              <b>Previene los contagios de Covid-19</b>
+              <b>Mide el riesgo de tener Covid-19</b>
+            </span>
+           </h1>
+          <a href="/login" target="_blank"><button class="custom-btn custom-btns light mt_20 mr_10 ml_10" type="button"><span>CONTESTA EL CUESTIONARIO GRATIS</span></button></a>
+          <a href="https://github.com/KIO-Alchemy-Labs/RiesgosCOVID-19" target="_blank"><button class="custom-btn custom-btns light mt_20 ml_10 mr_10" type="button"><span>DESCARGA EL CÓDIGO PARA MEJORARLO GRATIS</span></button></a>
+          <div class="home-arrow-down"> <a href="#about" class="btn"><i class="fa fa-long-arrow-down"></i></a> </div>
+        </div>
+      </div>
     </div>
-    <!-- /page content -->
+    <!-- =====  BANNER END  ===== -->
+    <!-- =====  ABOUT START  ===== -->
+    <section>
+      <div id="about" class="about ptb_100">
+        <div class="container">
+          <div class="about-inner ">
+            <div class="row">
+              <div class="col-md-5"></div>
+              <div class="col-md-7">
+                <div class="about-text ml_60">
+                  <div class="heading-part ">
+                    <h2 class="main_title about-heading mb_40 pb_20">¿Qué es?</h2>
+                  </div>
+                  <p class="mb_20">Es un cuestionario que tiene preguntas clave para detectar el nivel de riesgo y vulnerabilidad de las personas de tener Covid-19.</p>
+                  <p class="mb_20">Queremos compartir con la sociedad nuestro trabajo de manera gratuita para que las personas puedan tener una herramienta de prevención y que fortalezcan sus esfuerzos para salvaguardar la vida.</p>
+                  <p class="mb_20">No buscamos hacer un diagnóstico de la enfermedad, pero si buscamos ayudar a reducir las probabilidades de contagio.</p>
+                  <div class="heading-part">
+                    <h2 class="main_title about-heading mb_40 pb_20 mt_60">¿Cómo funciona?</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-md-4 col-xs-12 mb_50">
+              <div class="service">
+                <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/escuela.png' %}" alt="#"></div>
+                <h4 class="mtb_20">Contesta</h4>
+                <p>Contesta un sencillo cuestionario.</p>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12 mb_50">
+              <div class="service">
+                <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/service-2.png' %}" alt="#"></div>
+                <h4 class="mtb_20">Comparte</h4>
+                <p>Compartelo con tu comunidad.</p>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12 mb_50">
+              <div class="service">
+                <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/lupa.png' %}" alt="#"></div>
+                <h4 class="mtb_20">Identifica</h4>
+                <p>Identifica si debes tomar mayores cuidados.</p>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =====  ABOUT END  ===== -->
+    <!-- =====  WORK WITH US STRAT  ===== -->
+    <section id="answer" class="text-center parallax">
+      <div id="answer_div">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 ptb_100">
+              <div class="story_detail">
+                <h2 class="main_title light mb_20">Contesta el cuestionario</h2>
+                <h4 class="mtb_20 light"> <a class="light">Reduce las probabilidades de contagio identificando quién necesita mayores cuidados.</a></h4>
+                <p>Reduce las probabilidades de contagio identificando quién necesita mayores cuidados.</p>
+              </div>
+              <a href="/login" target="_blank"><button class="custom-btn custom-btns light mt_20 mr_10 ml_10" type="button"><span>CONTESTA EL CUESTIONARIO GRATIS</span></button></a>
+              <a href="https://github.com/KIO-Alchemy-Labs/RiesgosCOVID-19" target="_blank"><button class="custom-btn custom-btns light mt_20 mr_10 ml_10" type="button"><span>DESCARGA EL CÓDIGO PARA MEJORARLO GRATIS</span></button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =====  WORK WITH US END  ===== -->
+    <!-- =====  SERVICES STRAT  ===== -->
+    <section id="service" class="pt_100 pb_50">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="heading-part ">
+              <h2 class="main_title mb_20">¿Dónde usarlo?</h2>
+              <p class="mb_50">Ideas de donde puedes usar el cuestionario:</p>
+            </div>
+          </div>
+        </div>
+        <!-- Services  -->
+        <div class="row">
+          <div class="col-md-3 col-xs-6 mb_50">
+            <div class="service">
+              <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/how-1.png' %}" alt="#"></div>
+              <h4 class="mtb_20">Empresa</h4>
+              <p>Gracias a esta herramienta podremos tener un regreso paulatino a las instalaciones, asegurando la seguridad de los colaboradores.</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-xs-6 mb_50">
+            <div class="service">
+              <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/escuela.png' %}" alt="#"></div>
+              <h4 class="mtb_20">Escuela</h4>
+              <p>Nos ayudó mucho para evaluar el riesgo y vulnerabilidad de personal docente, administrativo, alumnos y familias.</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-xs-6 mb_50">
+            <div class="service">
+              <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/service-1.png' %}" alt="#"></div>
+              <h4 class="mtb_20">Condominio</h4>
+              <p>En nuestro condominio pedimos que cada persona que entre o salga lo llene y estamos atentos a los que representan un alto riesgo.</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-xs-6 mb_50">
+            <div class="service">
+              <div class="icon-top"><img src="{% static 'lookandfeel/landing/images/serviceicon/service-4.png' %}" alt="#"></div>
+              <h4 class="mtb_20">Familia</h4>
+              <p>Lo mande a mi familia para poder cuidar a los más vulnerables y hacer conscientes a los más desentendidos.</p>
+            </div>
+          </div>
+        </div>
+        <p class="mb_50">¡Protege a los tuyos, usar el cuestionario es gratis!</p>
+        <!-- Services -->
+      </div>
+    </section>
+    <!-- =====  SERVICES END  ===== -->
+    <!-- =====  HOW IT WORKS START  ===== -->
+    <section id="team" class="ptb_100">
+      <div class="container">
+        <div class="about-inner ">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="steps-text mr_60">
+                <div class="heading-part ">
+                  <h2 class="main_title about-heading pb_20">¿Quiénes somos?</h2>
+                </div>
+                <p class="mt_10"><a href="https://www.alchemylabs.cloud/" target="_blank">Alchemy labs<a> es el laboratorio de innovación de KIO Networks encargado de:</p>
+                <div class="row text-left ml_10 pt_50">
+                  <div class="feature-i-left">
+                    <div class="icon-right"><img src="{% static 'lookandfeel/landing/images/serviceicon/how-1.png' %}" alt="#"></i>
+                    </div>
+                    <h4 class="mb_10">Apoyar</h4>
+                    <p>Apoyar en el camino de un proceso de innovación con el uso y aplicación de Metodologías.</p>
+                  </div>
+                </div>
+                <div class="row text-left ml_10 pt_50">
+                  <div class="feature-i-left">
+                    <div class="icon-right"><img src="{% static 'lookandfeel/landing/images/serviceicon/how-2.png' %}" alt="#"></i>
+                    </div>
+                    <h4 class="mb_10">Experimentar</h4>
+                    <p>Realizar experimentos de alto impacto para las personas, las organizaciones, México y el mundo.</p>
+                  </div>
+                </div>
+                <div class="row text-left ml_10 ptb_50">
+                  <div class="feature-i-left">
+                    <div class="icon-right"><img src="{% static 'lookandfeel/landing/images/serviceicon/how-3.png' %}" alt="#"></i>
+                    </div>
+                    <h4 class="mb_10">Implementar</h4>
+                    <p>Todo esto de la mano de las nuevas tendencias tecnológicas como:</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <figure> <img src="images/about-img.png" alt="#"> </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =====  HOW IT WORKS END  ===== -->
+    <!-- =====  CONTACT START  ===== -->
+    <section id="contact" class="ptb_100">
+      <div id="contact_div">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 mb_20 col-md-offset-3 text-center">
+              <div class="heading-part ">
+                <h2 class="main_title mb_20">Contáctate con nosotros</h2>
+                <p>Innovación, tecnología y alianzas son elementos que dominamos, aplicalos con nuestra ayuda, recuerda que ¡Tu éxito es nuestro éxito!</p>
+                <p>No dudes en contactarnos, Estamos para asesorarte y guiarte en el camino de la innovación.</p>
 
-    <!-- site foot -->
-    <script src="{% static 'lookandfeel/js/vendor.min.js' %}"></script>
-    <script src="{% static 'lookandfeel/js/main.js' %}"></script>
-    <script src="{% static 'lookandfeel/js/settings.min.js' %}"></script>
-    <script src="{% static 'lookandfeel/js/charts.js' %}"></script>
+                <a href="mailto:alchemylabs@kionetworks.com"><button class="custom-btn custom-btns mt_60"><span>Enviar email</span></button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =====  CONTACT END  ===== -->
+    <!-- =====  FOOTER START  ===== -->
+    <div class="footer bg-dark ptb_40">
+      <div class="container">
+        <p class="mb_20">En Alchemy Labs buscamos compartir con la sociedad un cuestionario que permita evaluar riesgos de contagio y hacer conciencia sobre las vulnerabilidades a causa del COVID-19. </p>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="copyright-part mtb_10">@ 2020 All Rights Reserved Alchemy Labs</div>
+            <div class="social_icon">
+              <ul>
+                <li><a href="https://www.facebook.com/AlchemyLabsKIO/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/alchemy_labs" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- =====  FOOTER END  ===== -->
+  </div>
+  <!-- =====  WRAPPER END  ===== -->
+  <!-- =====  SCRIPT START  ===== -->
+  <script src="{% static 'lookandfeel/landing/js/jQuery_v3.1.1.min.js' %}"></script>
+  <script src="{% static 'lookandfeel/landing/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lookandfeel/landing/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'lookandfeel/landing/js/custom.js' %}"></script>
+  <script src="{% static 'lookandfeel/landing/js/letters-type.js' %}"></script>
+  <script src="{% static 'lookandfeel/landing/js/parallax.js' %}"></script>
+  <script src="{% static 'lookandfeel/landing/js/jquery.easeScroll.js' %}"></script>
+  <script type="text/javascript">
+  $("html").easeScroll();
+  // Add scrollspy to <body>
+  $('body').scrollspy({ target: '#menu' })
+  $("#menu ul li a[href^='#'], .home-arrow-down a").on('click', function(e) {
+    // prevent default anchor click behavior
+    e.preventDefault();
+    // store hash
+    var hash = this.hash;
+    // animate
+    $('html, body').animate({
+      scrollTop: $(hash).offset().top
+    }, 1500, function() {
+      // when done, add hash to url
+      // (default click behaviour)
+      window.location.hash = hash;
+    });
+  });
+  </script>
+  <!-- =====  SCRIPT END  ===== -->
 </body>
 
 </html>
-<!-- /site foot -->
