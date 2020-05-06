@@ -18,7 +18,7 @@ services:
     container_name: webserver
     restart: on-failure
     ports:
-      - 80:80
+      - 3031:3031
     depends_on:
       - webapp
     volumes:

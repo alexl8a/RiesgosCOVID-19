@@ -13,7 +13,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 SECRET_KEY = '5%=&%c&l=mr-i=9(2bz=oiwnam+^t#f+%6z7*p%bmz9lzb*att'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'riesgos.urls'
 
@@ -214,15 +214,37 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-# WKHTMLTOPDF
+# wkhtml to pdf
 WKHTMLTOPDF_CMD_OPTIONS = {
-    'quiet': True,
+'quiet': True,
 }
 
 if os.name != 'nt':
-    WKHTMLTOPDF_CMD = '/usr/local/bin/wkhtmltopdf'
+    WKHTMLTOPDF_CMD = '/usr/bin/wkhtmltopdf'
 else:
     WKHTMLTOPDF_DEBUG = True
+
+#·Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}
 
 # LOAD LOCAL SETTINGS
 try:
