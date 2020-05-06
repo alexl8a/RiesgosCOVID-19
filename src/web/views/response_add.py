@@ -51,7 +51,7 @@ class ResponseAdd(LoginRequiredMixin, View):
 
         response.user = request.user
 
-        response.facility = request.POST['facility']
+        response.facility = 1
 
         response.risk_result_i = 0
 
