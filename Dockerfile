@@ -17,4 +17,6 @@ RUN pip install -r requirements.txt
 
 COPY ./src .
 
+EXPOSE 3031
+
 CMD uwsgi --module=riesgos.wsgi:application --master --processes 2 --die-on-term --socket webapp:3031
